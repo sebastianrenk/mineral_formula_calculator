@@ -96,6 +96,33 @@ def create_formula(components: dict):
     return formula
 
 
+def charge_distribution(components: dict):
+
+    i = 0
+    i += components["cao"]["atoms"] * components["cao"]["charge_ind"]
+    i += components["k2o"]["atoms"] * components["k2o"]["charge_ind"]
+    i += components["na2o"]["atoms"] * components["na2o"]["charge_ind"]
+
+    t = 0
+    t += components["sio2"]["atoms"] * components["sio2"]["charge_ind"]
+    al2 = 0
+    
+    if components["sio2"]["atoms"] >= 4:
+        al2 = 0
+    else:
+        al2 = (4 - components['sio2']['atoms'])
+    
+    t += al2 * 3
+
+    o = 0
+    o += components["mgo"]["atoms"] * components["mgo"]["charge_ind"]
+    o += components["fe2o3"]["atoms"] * components["fe2o3"]["charge_ind"]
+    al1 = components["al2o3"]["atoms"] - al2
+    o += al1 * 3
+    
+    return f"I: {i}\nO: {o}\nT: {t}"
+
+
 def main():
 
     print("===Enter wt%===")
@@ -105,6 +132,8 @@ def main():
     formula = create_formula(components)
 
     print("Formula:", formula)
+    print("Charge distribution:")
+    print(charge_distribution(components))
 
 
 if __name__ == '__main__':
