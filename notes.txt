@@ -1,0 +1,5 @@
+read in wt%
+calculate atoms
+
+create formula
+calculate values
