@@ -119,20 +119,21 @@ def charge_distribution(components: dict):
     o += components["fe2o3"]["atoms"] * components["fe2o3"]["charge_ind"]
     al1 = components["al2o3"]["atoms"] - al2
     o += al1 * 3
-    
-    return f"I: {i}\nO: {o}\nT: {t}"
+
+    return f"I: {i:.3f}\nO: {o:.3f} / {(6-o):.3f}\nT: {t:.3f} / {(16-t):.3f}\n{i:.3f} : {(-(6-o)-(16-t)):.3f}"
 
 
 def main():
 
-    print("===Enter wt%===")
+    print("=========Enter wt%=========")
 
     components = read_in_wt()
     components = calculate_atoms(components)
     formula = create_formula(components)
 
-    print("Formula:", formula)
-    print("Charge distribution:")
+    print("\n==========FORMULA==========")
+    print(formula)
+    print("\n====CHARGE DISTRIBUTION====")
     print(charge_distribution(components))
 
 
